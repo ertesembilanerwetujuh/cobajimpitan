@@ -1,5 +1,5 @@
 if (localStorage.getItem("login") === "true") {
-  window.location.href = "app.html";
+  window.location.href = "catatan.html";
 }
 
 import { supabase } from "./supabase.js";
@@ -46,5 +46,5 @@ document.getElementById("btnLanjutkan").onclick = async () => {
   }
 
   // masuk app
-  window.location.href = "app.html";
+  window.location.href = "catatan.html";
 };

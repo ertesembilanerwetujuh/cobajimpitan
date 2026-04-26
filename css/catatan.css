@@ -1,4 +1,10 @@
+
 /* ================= GLOBAL ================= */
+:root {
+  --side-padding: 16px;
+  --safe-width: min(100%, 390px);
+}
+
 * {
   font-family: 'Roboto', sans-serif;
   box-sizing: border-box;
@@ -8,12 +14,24 @@ body {
   margin: 0;
   background: #fff;
   color: #111;
+
+    display: flex;
+  justify-content: center;
+
+  padding-top: env(safe-area-inset-top);
+  padding-bottom: env(safe-area-inset-bottom);
 }
+
+
+html, body {
+  height: 100dvh;
+}
+
 
 /* ================= WRAPPER ================= */
 .input-page {
-  width: min(100%, 390px);
-  height: 100vh;
+  width: var(--safe-width);
+  height: 100dvh;
   margin: 0 auto;
   background: #fff;
 
@@ -34,13 +52,20 @@ body {
   justify-content: space-between;
   align-items: center;
 
-  padding: 8px 14px;
+  padding: 4px var(--side-padding) 0px;
+}
+
+/* 🔥 TAMBAH GROUP KANAN */
+.topbar-right {
+  display: flex;
+  align-items: center;
+  gap: 6px; /* jarak scan & filter */
 }
 
 .brand {
-  font-size: 28px;
-  font-weight: 700;
-  line-height: 1;
+  font-size: 32px !important;
+  font-weight: 600 !important;
+  letter-spacing: 0.5px;
 }
 
 .icon-button {
@@ -49,20 +74,28 @@ body {
   border: none;
 }
 
+.icon-button img {
+  width: 30px;
+  height: 30px;
+  display: block;
+}
+
 /* ================= FILTER BADGE ================= */
 .filter-badge {
   display: none;
   align-items: center;
-  gap: 4px;
+  gap: 6px;
 
-  padding: 3px 8px;
-  font-size: 11px;
+  padding: 6px 10px; /* 🔥 lebih lega */
+  font-size: 18px;
   border-radius: 999px;
 
   background: #e8fff0;
   color: #16a34a;
 
   border: none;
+
+  margin-right: 2px; /* 🔥 kasih napas kanan */
 }
 
 .filter-badge.show {
@@ -70,22 +103,26 @@ body {
 }
 
 .filter-icon {
-  width: 12px;
-  height: 12px;
+  width: 14px;
+  height: 14px;
 }
 
 /* ================= SIDEBAR ================= */
 .sidebar {
   position: fixed;
-  top: 60px;
-  right: 10px;
 
-  min-width: 160px;
+  /* 🔥 TURUN DARI TOPBAR */
+  top: 72px;
+
+  /* 🔥 tetap mengikuti container center (bukan nempel kanan layar) */
+  right: calc(50% - 195px + 8px);
+
+  min-width: 190px; /* 🔥 lebih lebar dari sebelumnya */
   background: #fff;
   z-index: 999;
 
-  border-radius: 12px;
-  box-shadow: 0 6px 20px rgba(0,0,0,0.1);
+  border-radius: 14px;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.12);
 
   transform: translateY(-10px);
   opacity: 0;
@@ -108,16 +145,20 @@ body {
 }
 
 .sidebar-title {
-  font-size: 14px;
+  font-size: 20px;
   font-weight: 600;
   margin: 6px 10px;
 }
 
 .sidebar-item {
-  padding: 7px 10px;
-  font-size: 12px;
-  border-radius: 8px;
+  padding: 10px 12px;
+  font-size: 16px;
+  border-radius: 10px;
   cursor: pointer;
+
+  display: flex;
+  align-items: center;
+  gap: 10px; /* 🔥 INI KUNCINYA */
 }
 
 .sidebar-item:hover {
@@ -128,7 +169,7 @@ body {
 .overlay {
   position: fixed;
   inset: 0;
-  background: rgba(0,0,0,0.15);
+  background: rgba(0,0,0,0.12); /* 🔥 lebih soft */
 
   opacity: 0;
   pointer-events: none;
@@ -141,50 +182,87 @@ body {
   pointer-events: auto;
 }
 
+
+.search-box {
+  width: 100%;
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+/* INPUT */
+.search-box input {
+  width: 100%;
+  height: 50px;
+
+  border-radius: 50px;
+  border: none;
+  background: #f3f4f6;
+
+  padding: 0 52px; /* FIX: lebih lega */
+
+  font-size: 16px;
+  outline: none;
+}
+
+/* ICON KIRI */
+.icon-left {
+  position: absolute;
+  left: 18px; /* FIX lebih masuk */
+
+  width: 28px;
+  height: 28px;
+
+  opacity: 0.7;
+}
+
+.icon-right {
+  position: absolute;
+  right: 18px; /* FIX lebih masuk */
+
+  width: 28px;
+  height: 28px;
+
+  opacity: 0.7;
+  cursor: pointer;
+}
+
 /* ================= SEARCH ================= */
 .search-form {
+
   position: sticky;
   top: 0;
   z-index: 40;
 
   background: #fff;
-  padding: 6px 16px 10px;
+  padding: 0px var(--side-padding) 6px;
 }
 
-.search-form input {
-  width: 100%;
-  height: 40px;
 
-  border-radius: 50px;
-  border: none;
-
-  background: #f3f4f6;
-  padding: 0 14px;
-
-  font-size: 13px;
-  outline: none;
-}
 
 /* ================= LIST ================= */
 #listWarga {
   flex: 1;
   overflow-y: auto;
 
-  padding: 10px 16px 120px;
+  display: flex;
+  flex-direction: column;
+
+  padding: 10px var(--side-padding) 120px;
 }
 
 /* ================= ITEM ================= */
 .wa-item {
   padding: 12px 0;
-  border-bottom: 1px solid #eee;
 }
 
 .wa-row {
   display: grid;
-  grid-template-columns: 32px 1fr auto;
+  grid-template-columns: 70px 1fr auto;
   align-items: center;
+
   column-gap: 10px;
-  cursor: pointer;
+  padding-right: 4px; /* 🔥 FIX biar gak nempel kanan */
 }
 
 /* LEFT */
@@ -196,18 +274,18 @@ body {
 }
 
 .icon {
-  width: 32px;
-  height: 32px;
+  width: 50px;
+  height: 50px;
   border-radius: 50%;
 }
 
 .kode {
-  font-size: 13px;
-  font-weight: 700;
+  font-size: 18px;
+  font-weight: 600;
 }
 
 .nama {
-  font-size: 12px;
+  font-size: 16px;
   color: #666;
   white-space: nowrap;
   overflow: hidden;
@@ -222,12 +300,12 @@ body {
 }
 
 .total {
-  font-size: 14px;
-  font-weight: 700;
+  font-size: 18px;
+  font-weight: 600;
 }
 
 .status {
-  font-size: 12px;
+  font-size: 16px;
   color: #999;
 }
 
@@ -246,55 +324,65 @@ body {
 
 
 
-/* ================= DETAIL PAGE ================= */
+/* ================= DETAIL PAGE WRAPPER ================= */
 #detailPage {
   position: fixed;
   inset: 0;
   background: #ffffff;
   z-index: 999;
 
+  display: flex;
+  justify-content: center;
+
   transform: translateX(100%);
   transition: 0.25s ease;
 
-  display: flex;
-  flex-direction: column;
+  padding-top: env(safe-area-inset-top);
+  padding-bottom: env(safe-area-inset-bottom);
 }
 
 #detailPage.open {
   transform: translateX(0);
 }
 
-/* HEADER */
+/* ================= INNER ================= */
+.detail-content {
+  width: min(100%, 390px);
+  height: 100dvh;
+
+  display: flex;
+  flex-direction: column;
+}
+
+/* ================= HEADER (ARROW CENTER TOP) ================= */
 .detail-header {
+  position: relative;
+  padding: 24px 16px 10px; /* 🔥 tambah jarak bawah header */
+
   display: flex;
+  justify-content: center;  /* 🔥 center horizontal */
   align-items: center;
-  justify-content: space-between;
-  padding: 12px 14px;
-  background: #fff;
 }
 
-/* LEFT HEADER GROUP */
-.header-left {
-  display: flex;
-  align-items: center;
-  gap: 10px;
-}
-
+/* arrow tetap kecil */
 .back-btn {
-  border: none;
-  background: none;
+  position: absolute;
+  top: 14px;
+  left: 50%;
+  transform: translateX(-50%);
+
   display: flex;
   align-items: center;
+  justify-content: center;
+
+  background: none;
+  border: none;
+  padding: 0;
 }
 
 .back-btn img {
-  width: 22px;
-  height: 22px;
-}
-
-.header-id {
-  font-weight: 600;
-  font-size: 14px;
+  width: 32px;
+  height: 32px;
 }
 
 /* ================= BODY ================= */
@@ -306,34 +394,33 @@ body {
   align-items: center;
   justify-content: center;
 
-  padding: 20px;
-  gap: 10px;
-
-  transform: translateY(-8px); /* 🔥 bantu center visual */
+  padding: 34px;
+  text-align: center;
+  gap: 18px;
 }
 
-/* ================= ID (NO RUMAH) ================= */
+/* ================= TEXT (NOMINAL FOCUS MAX) ================= */
 .detail-id-big {
-  font-size: 40px;
+  font-size: clamp(56px, 10vw, 64px);
   font-weight: 600;
   color: #444;
-  margin-top: -50px; /* naik sedikit */
 }
 
-/* ================= NAMA ================= */
 .detail-nama-big {
-  font-size: 22px;
+  font-size: clamp(28px, 7.5vw, 36px);
   font-weight: 700;
-  margin-top: -9px; /* naik sedikit */
+  color: #111;
 }
 
-/* ================= NOMINAL (CENTER UTAMA) ================= */
+/* 🔥 NOMINAL DIBESARIN PALING UTAMA */
 .detail-value {
-  font-size: 48px;
-  font-weight: 800;
+  font-size: clamp(92px, 20vw, 96px);
+  font-weight: 900;
   letter-spacing: 1px;
+  line-height: 1;
 }
 
+/* warna */
 #detailPage .detail-value.zero {
   color: #dc2626;
 }
@@ -342,51 +429,43 @@ body {
   color: #186e30;
 }
 
-/* NOTE */
-.detail-note {
-  font-size: 12px;
-  color: #888;
-  margin-top: 6px;
-}
-
-/* NOTE TITLE + DESC */
+/* ================= NOTE ================= */
 .detail-note-title {
-  font-size: 12px;
+  font-size: 16px;
   color: #888;
-  margin-top: 6px;
-  font-weight: 500;
+  margin-top: 10px;
 }
 
 .detail-note-desc {
-  font-size: 11px;
+  font-size: 13px;
   color: #aaa;
-  margin-top: 2px;
 }
 
 /* ================= COUNTER ================= */
 .counter {
   display: flex;
-  gap: 20px;
-  margin-top: 18px;
+  gap: 34px;
+  margin-top: 30px;
 }
 
 .counter button {
-  width: 50px;
-  height: 50px;
+  width: 78px;
+  height: 78px;
 
   border-radius: 50%;
   border: 1px solid #ddd;
   background: #fff;
 
-  font-size: 20px;
+  font-size: 32px;
+  font-weight: 700;
 }
 
 /* ================= SAVE ================= */
 .save {
-  margin-top: 22px;
+  margin-top: 36px;
 
-  width: 60%;
-  height: 50px;
+  width: 82%;
+  height: 66px;
 
   border-radius: 999px;
   border: none;
@@ -394,16 +473,16 @@ body {
   background: #111;
   color: #fff;
 
-  font-weight: 600;
+  font-size: 20px;
+  font-weight: 700;
 }
-
 
 
 /* ================= BOTTOM NAV (FIX CENTER RATA) ================= */
 /* ================= BOTTOM NAV (NO BORDER / CLEAN) ================= */
 .bottom-nav {
   position: fixed;
-  bottom: 0;
+  bottom: 0px;
   left: 50%;
   transform: translateX(-50%);
 
@@ -412,7 +491,7 @@ body {
   display: grid;
   grid-template-columns: repeat(4, 1fr);
 
-  padding: 8px 6px;
+  padding: 16px 6px;
   background: #fff;
 
   border-top: none; /* 🔥 INI YANG HILANGIN GARIS */
@@ -424,21 +503,64 @@ body {
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  gap: 2px;
-
+  gap: 8px;
+font-weight: 600;
   text-align: center;
-  font-size: 11px;
-  color: #999;
+  font-size: 14px;
+  color: #000000;
   text-decoration: none;
 }
 
-.nav-item img {
-  width: 30px;
-  height: 30px;
+.nav-item {
+  position: relative;
+  z-index: 1;
 }
 
 .nav-item.is-active {
   color: #111;
+  font-weight: 600;
+}
+
+/* pill background */
+.nav-item.is-active::before {
+  content: "";
+  position: absolute;
+
+  top: 30%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+
+  width: 85%;
+  height: 42px;
+
+  background: #f2f2f2;
+  border-radius: 999px;
+
+  z-index: 0;
+}
+
+.nav-item img,
+.nav-item {
+  position: relative;
+  z-index: 2;
+}
+
+.nav-item.is-active::before {
+  transition: all 0.2s ease;
+}
+
+
+
+.nav-item img {
+  width: 32px;
+  height: 32px;
+    display: block;
+  margin: 0 auto;
+  filter: brightness(0); /* 🔥 paksa jadi hitam */
+}
+
+.nav-item.is-active {
+  color: #000000;
   font-weight: 600;
 }
 
@@ -467,3 +589,8 @@ body {
   opacity: 1;
   transform: translateX(-50%) translateY(0);
 }
+
+
+@media (max-height: 700px) {
+}
+

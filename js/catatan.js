@@ -71,6 +71,22 @@ function getTanggal() {
   return `${y}-${m}-${d}`;
 }
 
+
+const clearBtn = document.getElementById("clearSearch");
+
+clearBtn.onclick = () => {
+  el.search.value = "";
+  render();
+};
+
+el.search.addEventListener("input", () => {
+  render();
+
+  clearBtn.style.display = el.search.value ? "block" : "none";
+});
+
+
+
 // ================= ICON =================
 function getIcon(nama) {
   const total = state.total[nama];
@@ -83,10 +99,24 @@ function getIcon(nama) {
 function filterData(list) {
   const f = state.filter;
 
+  const getVal = (w) => state.total[w.nama];
+
   if (f === "all") return list;
-  if (f === "alert") return list.filter(w => state.total[w.nama] == null);
-  if (f === "zero") return list.filter(w => (state.total[w.nama] ?? 0) === 0);
-  if (f === "done") return list.filter(w => (state.total[w.nama] ?? 0) > 0);
+
+  // ❗ BELUM INPUT = NULL
+  if (f === "alert") {
+    return list.filter(w => getVal(w) == null);
+  }
+
+  // ❗ SUDAH INPUT TAPI 0
+  if (f === "zero") {
+    return list.filter(w => getVal(w) !== null && getVal(w) === 0);
+  }
+
+  // ❗ SUDAH BAYAR (>0)
+  if (f === "done") {
+    return list.filter(w => getVal(w) > 0);
+  }
 
   return list;
 }

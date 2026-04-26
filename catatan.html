@@ -21,27 +21,30 @@
   <main class="input-page">
 
     <!-- ================= TOPBAR ================= -->
-    <header class="topbar">
-      <h1 class="brand">Jimpitan</h1>
+<header class="topbar">
+  <h1 class="brand">Jimpitan</h1>
 
-      <!-- FILTER BADGE -->
-      <button id="filterBadge" class="filter-badge" type="button">
-        <span id="filterText">Filter</span>
-        <!-- FIX: pastikan file ini ADA -->
-        <img id="filterIcon" class="filter-icon" src="assets/icons/circle-alert.svg" alt="filter">
-      </button>
+  <!-- RIGHT GROUP -->
+  <div class="topbar-right">
 
-      <!-- SCAN -->
-      <button id="btnScan" class="icon-button" type="button" aria-label="Scan">
-        <img src="assets/icons/scan-line.svg" alt="scan">
-      </button>
+    <!-- FILTER BADGE -->
+    <button id="filterBadge" class="filter-badge" type="button">
+      <span id="filterText">Filter</span>
+      <img id="filterIcon" class="filter-icon" src="assets/icons/circle-alert.svg" alt="filter">
+    </button>
 
-      <!-- MENU -->
-      <button id="btnMenu" class="icon-button" type="button" aria-label="Menu">
-        <img src="assets/icons/list-filter.svg" width="26" alt="menu">
-      </button>
+    <!-- SCAN -->
+    <button id="btnScan" class="icon-button" type="button" aria-label="Scan">
+      <img src="assets/icons/scan-line.svg" alt="scan">
+    </button>
 
-    </header>
+    <!-- MENU -->
+    <button id="btnMenu" class="icon-button" type="button" aria-label="Menu">
+      <img src="assets/icons/list-filter.svg" width="26" alt="menu">
+    </button>
+
+  </div>
+</header>
 
     <!-- ================= SIDEBAR ================= -->
     <div id="sidebar" class="sidebar">
@@ -86,13 +89,17 @@
     <div id="overlay" class="overlay"></div>
 
     <!-- ================= SEARCH ================= -->
-    <div class="search-form">
-      <input 
-        type="search" 
-        id="searchInput" 
-        placeholder="Cari nama atau nomor rumah..."
-      >
-    </div>
+<div class="search-form">
+  <div class="search-box">
+    
+    <img src="assets/icons/search.svg" class="icon-left">
+
+    <input id="searchInput" type="text" placeholder="Cari nama warga...">
+
+    <img src="assets/icons/x.svg" class="icon-right" id="clearSearch">
+
+  </div>
+</div>
 
     <!-- ================= LIST ================= -->
     <div id="listWarga"></div>
@@ -127,29 +134,33 @@
     <!-- ================= DETAIL PAGE (WHATSAPP STYLE) ================= -->
     <div id="detailPage" class="detail-page">
 
-      <div class="detail-header">
-        <button id="btnBack" class="back-btn">
-          <img src="assets/icons/arrow-left.svg" alt="">
-        </button>
-      </div>
+      <div class="detail-page-inner">
 
-      <div class="detail-body">
-
-        <div id="detailId" class="detail-id-big">ID</div>
-
-        <div class="detail-nama-big" id="detailNamaBig">Nama</div>
-
-        <div id="detailValue" class="detail-value">0</div>
-
-        <div class="detail-note-title">Hari ini</div>
-        <div class="detail-note-desc">Jika direvisi, nilai terakhir diterapkan</div>
-
-        <div class="counter">
-          <button id="minus">-</button>
-          <button id="plus">+</button>
+        <div class="detail-header">
+          <button id="btnBack" class="back-btn">
+            <img src="assets/icons/arrow-left.svg" alt="">
+          </button>
         </div>
 
-        <button id="saveBtn" class="save">Simpan</button>
+        <div class="detail-body">
+
+          <div id="detailId" class="detail-id-big">ID</div>
+
+          <div class="detail-nama-big" id="detailNamaBig">Nama</div>
+
+          <div id="detailValue" class="detail-value">0</div>
+
+          <div class="detail-note-title">Hari ini</div>
+          <div class="detail-note-desc">Jika direvisi, nilai terakhir diterapkan</div>
+
+          <div class="counter">
+            <button id="minus">-</button>
+            <button id="plus">+</button>
+          </div>
+
+          <button id="saveBtn" class="save">Simpan</button>
+
+        </div>
 
       </div>
     </div>
